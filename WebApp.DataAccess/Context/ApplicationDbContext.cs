@@ -15,7 +15,9 @@ namespace WebApp.DataAccess.Context
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
+
         public DbSet<User> Users { get; set; }
+        public DbSet<SearchParameter> SearchParameters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

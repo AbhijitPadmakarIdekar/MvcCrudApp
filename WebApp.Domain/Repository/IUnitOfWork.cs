@@ -10,6 +10,7 @@ namespace WebApp.Domain.Repository
     public interface IUnitOfWork : IDisposable
     {
         IUserRepository User { get; }
+        ISearchParameterRepository SearchParameter { get; }
         int SaveChanges();
     }
 }

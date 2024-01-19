@@ -18,10 +18,12 @@ namespace WebApp.DataAccess.Implementation
         {
             _dbContext = dbContext;
             User = new UserRepository(dbContext);
+            SearchParameter = new SearchParameterRepository(dbContext);
         }
 
         public IUserRepository User { get; set; }
-
+        public ISearchParameterRepository SearchParameter { get; set; }
+             
         public int SaveChanges()
         {
             return _dbContext.SaveChanges();
