@@ -33,18 +33,22 @@ namespace MvcCrudApp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-           
                 _unitOfWork.User.Add(user);
                 _unitOfWork.SaveChanges();
                 
-                return RedirectToAction("Index", "Home"); 
+                return RedirectToAction("Success", "Home"); 
             }
 
-           
             return View(user);
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Success()
         {
             return View();
         }
@@ -54,7 +58,5 @@ namespace MvcCrudApp.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-
     }
 }

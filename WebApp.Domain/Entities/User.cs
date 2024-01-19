@@ -17,13 +17,16 @@ namespace WebApp.Domain.Entities
         [MaxLength(50)]
         public string? UserName { get; set; } = string.Empty;
 
+        [Required]
         [MaxLength(50)]
         public string? Role { get; set; } = string.Empty;
         public DateTime? LastLogin { get; set; }
 
+        [Required]
         [MaxLength(50)]
         public string? FName { get; set; } = string.Empty;
 
+        [Required]
         [MaxLength(50)]
         public string? LName { get; set; } = string.Empty;
 
