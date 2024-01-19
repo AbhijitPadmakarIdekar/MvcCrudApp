@@ -1,12 +1,12 @@
-﻿using MvcCrudApp.Data.Context;
-using MvcCrudApp.Domain.Entities;
-using MvcCrudApp.Domain.Repository;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using MvcCrudApp.Data.Context;
+using MvcCrudApp.Domain.Entities;
+using MvcCrudApp.Domain.Repository;
 
 namespace MvcCrudApp.Data.Implementation
 {
