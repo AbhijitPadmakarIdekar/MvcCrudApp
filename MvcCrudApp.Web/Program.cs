@@ -17,7 +17,7 @@ namespace MvcCrudApp.Web
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Add services tothe container
+            // Add services to the container
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
