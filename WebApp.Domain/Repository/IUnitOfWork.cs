@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MvcCrudApp.Domain.Repository
+namespace WebApp.Domain.Repository
 {
     public interface IUnitOfWork : IDisposable
     {

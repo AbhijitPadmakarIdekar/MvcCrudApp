@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MvcCrudApp.Data.Context;
-using MvcCrudApp.Domain.Repository;
+using WebApp.DataAccess.Context;
+using WebApp.DataAccess.Implementation;
+using WebApp.Domain.Repository;
 
 namespace MvcCrudApp.Web
 {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MvcCrudApp.Domain.Entities
+namespace WebApp.Domain.Entities
 {
     public class User
     {

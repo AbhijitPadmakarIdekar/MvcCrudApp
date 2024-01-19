@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using System.Linq.Expressions;
 
-namespace MvcCrudApp.Domain.Repository
+namespace WebApp.Domain.Repository
 {
     public interface IGenericRepository<T> where T : class
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using MvcCrudApp.Data.Context;
-using MvcCrudApp.Domain.Repository;
+using WebApp.DataAccess.Context;
+using WebApp.Domain.Repository;
 
-namespace MvcCrudApp.Data.Implementation
+namespace WebApp.DataAccess.Implementation
 {
     public class UnitOfWork : IUnitOfWork
     {
