@@ -1,0 +1,6 @@
+﻿INSERT INTO Users (UserId, UserName, Role, LastLogin, FName, LName, Department, DOJ, MgrId, Seniority, EmpCode)
+VALUES 
+(105, 'Acc0185', 'A/C Mgr', '2020-08-23 14:25:34', 'Sanjay', 'agarwal', 'Accounts', '2018-05-20', 78, 5.08, 'ACC0034'),
+(106, 'Acc0567', 'Asst.', NULL, 'Amit', 'Sharma', 'Accounts', '2020-09-16', 105, 8.15, 'ACC0598'),
+(428, 'Dev0476', 'VP', '2020-09-19 10:45:12', 'Lokesh', 'Kumar', 'Development', '2018-22-12', NULL, 1.05, 'DEV0833'),
+(568, 'ADM6633', 'Exec', NULL, 'Naresh', NULL, 'Admin', '2011-06-06', 70, 9.01, 'ADM0048');
