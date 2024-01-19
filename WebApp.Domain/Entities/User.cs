@@ -20,6 +20,8 @@ namespace WebApp.Domain.Entities
         [Required]
         [MaxLength(50)]
         public string? Role { get; set; } = string.Empty;
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime? LastLogin { get; set; }
 
         [Required]
@@ -32,12 +34,21 @@ namespace WebApp.Domain.Entities
 
         [MaxLength(50)]
         public string? Department { get; set; } = string.Empty;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DOJ { get; set; }
+
+        [RegularExpression(@"^\d{1,3}$", ErrorMessage = "MgrId must be a 1 to 3 digit number")]
+        [Range(1, 999, ErrorMessage = "MgrId must be between 1 and 999")]
         public int? MgrId { get; set; }
+
+        [Range(0, 9.99, ErrorMessage = "Seniority must be between 0 and 9.99")]
         public decimal? Seniority { get; set; }
 
         [Required]
         [MaxLength(10)]
+        [RegularExpression(@"^[A-Z]{3}\d{4}$", ErrorMessage = "EmpCode must be in the format XXX9999")]
         public string? EmpCode { get; set; } = string.Empty;
     }
 }

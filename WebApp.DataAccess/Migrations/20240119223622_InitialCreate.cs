@@ -18,20 +18,32 @@ namespace WebApp.DataAccess.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastLogin = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    FName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    FName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Department = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     DOJ = table.Column<DateTime>(type: "datetime2", nullable: true),
                     MgrId = table.Column<int>(type: "int", nullable: true),
-                    Seniority = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Seniority = table.Column<decimal>(type: "decimal(3,2)", nullable: true),
                     EmpCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_EmpCode",
+                table: "Users",
+                column: "EmpCode",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserName",
+                table: "Users",
+                column: "UserName",
+                unique: true);
         }
 
         /// <inheritdoc />

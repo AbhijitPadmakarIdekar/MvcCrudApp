@@ -19,4 +19,8 @@
     <ProjectReference Include="..\WebApp.Domain\WebApp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Search\" />
+  </ItemGroup>
+
 </Project>

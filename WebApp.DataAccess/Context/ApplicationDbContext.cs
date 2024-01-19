@@ -19,6 +19,12 @@ namespace WebApp.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasIndex(e => e.UserName).IsUnique();
+                entity.HasIndex(e => e.EmpCode).IsUnique();
+                entity.Property(e => e.Seniority).HasColumnType("decimal(3,2)");
+            });
         }
     }
 }
