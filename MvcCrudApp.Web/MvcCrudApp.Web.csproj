@@ -14,4 +14,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MvcCrudApp.Data\MvcCrudApp.Data.csproj" />
+  </ItemGroup>
+
 </Project>

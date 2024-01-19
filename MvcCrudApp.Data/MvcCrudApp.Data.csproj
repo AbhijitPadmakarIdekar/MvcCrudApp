@@ -7,9 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Implementation\GenericRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Database\" />
-    <Folder Include="Implementation\" />
     <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Implementation\GenericRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

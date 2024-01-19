@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using MvcCrudApp.Data.Context;
+using MvcCrudApp.Domain.Repository;
+
 namespace MvcCrudApp.Web
 {
     public class Program
@@ -8,6 +12,12 @@ namespace MvcCrudApp.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Add services tothe container
+            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
