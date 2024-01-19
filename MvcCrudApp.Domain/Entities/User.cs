@@ -27,7 +27,7 @@ namespace MvcCrudApp.Domain.Entities
         public string? LName { get; set; } = string.Empty;
 
         [MaxLength(50)]
-        public string? Department { get; set; } = string.Empty
+        public string? Department { get; set; } = string.Empty;
         public DateTime? DOJ { get; set; }
         public int? MgrId { get; set; }
         public decimal? Seniority { get; set; }
