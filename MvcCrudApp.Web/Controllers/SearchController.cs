@@ -23,8 +23,11 @@ namespace MvcCrudApp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitSearchEntry(SearchParameter? searchParameter)
+        public IActionResult SubmitEntry(SearchParameter? searchParameter)
         {
+            // Your logic to retrieve or generate data
+            bool dataToPass = false;
+
             // Get or create the entity
             var existingSearchParameter = _unitOfWork.SearchParameter.GetOrCreate(searchParameter.Username);
 
@@ -37,12 +40,16 @@ namespace MvcCrudApp.Web.Controllers
             {
                 // If the entity already exists, update it
                 _unitOfWork.SearchParameter.Update(searchParameter);
+                dataToPass = true;
             }
+
+            // Pass the data to the view using ViewBag
+            ViewBag.CustomData = dataToPass;
 
             // Save changes to the database
             _unitOfWork.SaveChanges();
 
-            return View("");
+            return View();
         }
 
         [HttpGet]
