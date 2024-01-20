@@ -9,5 +9,8 @@ namespace WebApp.Domain.Repository
 {
     public interface ISearchParameterRepository : IGenericRepository<SearchParameter>
     {
+        string ToJson();
+        SearchParameter FromJson(string jsonString);
+        SearchParameter GetOrCreate(string username);
     }
 }
