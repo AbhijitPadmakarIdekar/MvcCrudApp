@@ -22,6 +22,11 @@ namespace WebApp.DataAccess.Implementation
             _dbContext.Set<T>().Add(entity);
         }
 
+        public void Update(T entity)
+        {
+            _dbContext.Set<T>().Update(entity);
+        }
+
         public void AddRange(IEnumerable<T> entities)
         {
             _dbContext.Set<T>().AddRange(entities);

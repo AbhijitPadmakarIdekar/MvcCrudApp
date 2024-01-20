@@ -15,6 +15,7 @@ namespace WebApp.Domain.Repository
         public IEnumerable<T> GetAll();
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
         public void Add(T entity);
+        public void Update(T entity);
         public void AddRange(IEnumerable<T> entities);
         public void Remove(T entity);
         public void RemoveRange(IEnumerable<T> entities);

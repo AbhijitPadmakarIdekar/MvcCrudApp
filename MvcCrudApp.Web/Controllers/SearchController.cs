@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.DataAccess.Implementation;
+using WebApp.Domain.Entities;
 using WebApp.Domain.Repository;
 
 namespace MvcCrudApp.Web.Controllers
@@ -18,6 +20,29 @@ namespace MvcCrudApp.Web.Controllers
         public IActionResult SearchEntry()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult SubmitSearchEntry(SearchParameter? searchParameter)
+        {
+            // Get or create the entity
+            var existingSearchParameter = _unitOfWork.SearchParameter.GetOrCreate(searchParameter.Username);
+
+            if (existingSearchParameter.SearchParameterId == 0)
+            {
+                // If the entity is new (based on the primary key), add it
+                _unitOfWork.SearchParameter.Add(searchParameter);
+            }
+            else
+            {
+                // If the entity already exists, update it
+                _unitOfWork.SearchParameter.Update(searchParameter);
+            }
+
+            // Save changes to the database
+            _unitOfWork.SaveChanges();
+
+            return View("");
         }
 
         [HttpGet]

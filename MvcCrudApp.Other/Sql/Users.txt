@@ -19,3 +19,16 @@ SELECT TOP (1000) [UserId]
 FROM [senwellDB].[dbo].[Users]
 
 DELETE FROM Users;
+
+SELECT TOP (1000) [SearchParameterId]
+      ,[Username]
+      ,[Fieldname]
+      ,[Datatype]
+      ,[ControlType]
+      ,[Constraint]
+      ,[MaxLength]
+      ,[MinLimit]
+      ,[MaxLimit]
+      ,[MaskPattern]
+      ,[JsonData]
+  FROM [senwellDB].[dbo].[SearchParameters]

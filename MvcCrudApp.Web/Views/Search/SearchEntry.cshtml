@@ -1,4 +1,4 @@
-﻿@model WebApp.Domain.Entities.User
+﻿@model WebApp.Domain.Entities.SearchParameter
 
 @{
     ViewBag.Title = "Search Parameters Entry";
@@ -7,23 +7,25 @@
 <div class="container mt-5">
     <h2 class="mb-4">Search Parameters Entry Screen</h2>
 
-    <form id="searchParametersForm">
+    <form asp-controller="Search" asp-action="SubmitSearchEntry" method="post">
+        @Html.AntiForgeryToken()
+
         <!-- Username -->
         <div class="mb-3">
-            <label for="username" class="form-label">Username (Mandatory): </label>
-            <input type="text" id="username" name="username" class="form-control" required />
+            <label asp-for="Username" class="form-label">Username (Mandatory): </label>
+            <input asp-for="Username" class="form-control" required />
         </div>
 
         <!-- Fieldname -->
         <div class="mb-3">
-            <label for="fieldname" class="form-label">Fieldname (Mandatory): </label>
-            <input type="text" id="fieldname" name="fieldname" class="form-control" required />
+            <label asp-for="Fieldname" class="form-label">Fieldname (Mandatory): </label>
+            <input asp-for="Fieldname" class="form-control" required />
         </div>
 
         <!-- Datatype -->
         <div class="mb-3">
-            <label for="datatype" class="form-label">Datatype (Mandatory): </label>
-            <select id="datatype" name="datatype" class="form-select" required>
+            <label asp-for="Datatype" class="form-label">Datatype (Mandatory): </label>
+            <select asp-for="Datatype" class="form-select" required>
                 <option value="numeric">Numeric</option>
                 <option value="float">Float</option>
                 <option value="datetime">Datetime</option>
@@ -32,10 +34,11 @@
             </select>
         </div>
 
+        <!-- Add other form fields -->
         <!-- ControlType -->
         <div class="mb-3">
-            <label for="controlType" class="form-label">ControlType (Mandatory): </label>
-            <select id="controlType" name="controlType" class="form-select" required>
+            <label asp-for="ControlType" class="form-label">ControlType (Mandatory): </label>
+            <select asp-for="ControlType" class="form-select" required>
                 <option value="textbox">Textbox</option>
                 <option value="dropdownlist">Dropdownlist</option>
                 <option value="numericTextbox">Numeric Textbox</option>
@@ -46,65 +49,34 @@
 
         <!-- Constraint -->
         <div class="mb-3">
-            <label for="constraint" class="form-label">Constraint (Mandatory): </label>
-            <input type="text" id="constraint" name="constraint" class="form-control" required />
+            <label asp-for="Constraint" class="form-label">Constraint (Mandatory): </label>
+            <input asp-for="Constraint" class="form-control" required />
         </div>
 
         <!-- MaxLength -->
         <div class="mb-3">
-            <label for="maxLength" class="form-label">MaxLength (Optional): </label>
-            <input type="number" id="maxLength" name="maxLength" class="form-control" min="1" />
+            <label asp-for="MaxLength" class="form-label">MaxLength (Optional): </label>
+            <input asp-for="MaxLength" type="number" class="form-control" min="1" />
         </div>
 
         <!-- Min Limit -->
         <div class="mb-3">
-            <label for="minLimit" class="form-label">Min Limit (Optional): </label>
-            <input type="number" id="minLimit" name="minLimit" class="form-control" />
+            <label asp-for="MinLimit" class="form-label">Min Limit (Optional): </label>
+            <input asp-for="MinLimit" type="number" class="form-control" />
         </div>
 
         <!-- Max Limit -->
         <div class="mb-3">
-            <label for="maxLimit" class="form-label">Max Limit (Optional): </label>
-            <input type="number" id="maxLimit" name="maxLimit" class="form-control" />
+            <label asp-for="MaxLimit" class="form-label">Max Limit (Optional): </label>
+            <input asp-for="MaxLimit" type="number" class="form-control" />
         </div>
 
         <!-- MaskPattern -->
         <div class="mb-3">
-            <label for="maskPattern" class="form-label">MaskPattern (Optional): </label>
-            <input type="text" id="maskPattern" name="maskPattern" class="form-control" />
+            <label asp-for="MaskPattern" class="form-label">MaskPattern (Optional): </label>
+            <input asp-for="MaskPattern" class="form-control" />
         </div>
 
-        <button type="button" onclick="saveSearchParameters" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
-
-<script>
-    function saveSearchParameters() {
-        // Use JavaScript/jQuery to collect data and save it to the database via Ajax
-        var searchData = {
-            username: $('#username').val(),
-            fieldname: $('#fieldname').val(),
-            datatype: $('#datatype').val(),
-            controlType: $('#controlType').val(),
-            constraint: $('#constraint').val(),
-            maxLength: $('#maxLength').val(),
-            minLimit: $('#minLimit').val(),
-            maxLimit: $('#maxLimit').val(),
-            maskPattern: $('#maskPattern').val(),
-        };
-
-        // Perform an Ajax call to save data
-        $.ajax({
-            url: '/SearchParameters/Save', // Adjust the URL as per your routing
-            type: 'POST',
-            data: JSON.stringify(searchData),
-            contentType: 'application/json',
-            success: function (data) {
-                alert('Search parameters saved successfully!');
-            },
-            error: function (error) {
-                console.error('Error saving search parameters:', error);
-            }
-        });
-    }
-</script>
