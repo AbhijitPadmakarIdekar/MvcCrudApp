@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApp.DataAccess.Implementation;
 using WebApp.Domain.Entities;
 using WebApp.Domain.Repository;
@@ -29,9 +30,9 @@ namespace MvcCrudApp.Web.Controllers
             bool dataToPass = false;
 
             // Get or create the entity
-            var existingSearchParameter = _unitOfWork.SearchParameter.GetOrCreate(searchParameter.Username);
+            var existingSearchParameter = _unitOfWork.SearchParameter.Find(x => x.Username == searchParameter.Username).ToList<SearchParameter>();
 
-            if (existingSearchParameter.SearchParameterId == 0)
+            if (existingSearchParameter == null || existingSearchParameter.Count() == 0)
             {
                 // If the entity is new (based on the primary key), add it
                 _unitOfWork.SearchParameter.Add(searchParameter);
@@ -39,7 +40,20 @@ namespace MvcCrudApp.Web.Controllers
             else
             {
                 // If the entity already exists, update it
-                _unitOfWork.SearchParameter.Update(searchParameter);
+                for (int i = 0; i < existingSearchParameter.Count; i++)
+                {
+                    existingSearchParameter[i].Username = searchParameter.Username;
+                    existingSearchParameter[i].Fieldname = searchParameter.Fieldname;
+                    existingSearchParameter[i].Datatype = searchParameter.Datatype;
+                    existingSearchParameter[i].ControlType = searchParameter.ControlType;
+                    existingSearchParameter[i].Constraint = searchParameter.Constraint;
+                    existingSearchParameter[i].MaxLength = searchParameter.MaxLength;
+                    existingSearchParameter[i].MinLimit = searchParameter.MinLimit;
+                    existingSearchParameter[i].MaxLimit = searchParameter.MaxLimit;
+                    existingSearchParameter[i].MaskPattern = searchParameter.MaskPattern;
+                    existingSearchParameter[i].JsonData = searchParameter.JsonData;
+                }
+
                 dataToPass = true;
             }
 

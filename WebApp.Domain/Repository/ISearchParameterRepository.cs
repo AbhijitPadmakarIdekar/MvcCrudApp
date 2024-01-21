@@ -11,6 +11,5 @@ namespace WebApp.Domain.Repository
     {
         string ToJson();
         SearchParameter FromJson(string jsonString);
-        SearchParameter GetOrCreate(string username);
     }
 }
