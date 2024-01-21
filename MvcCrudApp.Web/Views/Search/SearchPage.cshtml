@@ -1,1 +1,42 @@
-﻿
+﻿@model WebApp.Domain.Entities.SearchParameter
+
+@using System.Text.Json
+
+@{
+    var searchParameters = JsonSerializer.Deserialize<WebApp.Domain.Entities.SearchParameter>(Model.JsonData);
+}
+
+@{
+    ViewBag.Title = "Search Page";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Search Page</h2>
+    <form id="searchForm" method="post" action="/Search/SearchResults">
+        <!-- Render search fields dynamically based on SearchParameters JSON -->
+        @Html.Hidden(searchParameters.Fieldname, "")
+
+        <!-- Check the ControlType and render the corresponding input field -->
+        @if (searchParameters.ControlType == "textbox")
+        {
+            <div class="mb-3">
+                <label for="@searchParameters.Fieldname" class="form-label">@searchParameters.Fieldname:</label>
+                <input type="text" id="@searchParameters.Fieldname" name="@searchParameters.Fieldname" class="form-control" />
+            </div>
+        }
+        else if (searchParameters.ControlType == "dropdownlist")
+        {
+            <!-- Render dropdownlist based on available options -->
+            <div class="mb-3">
+                <label for="@searchParameters.Fieldname" class="form-label">@searchParameters.Fieldname:</label>
+                <select id="@searchParameters.Fieldname" name="@searchParameters.Fieldname" class="form-select">
+                    <!-- Render options dynamically based on available options -->
+
+                </select>
+            </div>
+        }
+        <!-- Add other control types as needed -->
+
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>

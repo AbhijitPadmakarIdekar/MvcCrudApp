@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using WebApp.DataAccess.Implementation;
 using WebApp.Domain.Entities;
 using WebApp.Domain.Repository;
@@ -15,6 +16,25 @@ namespace MvcCrudApp.Web.Controllers
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+        }
+
+        [HttpGet]
+        public IActionResult SearchPage(string? username)
+        {
+            SearchParameter searchParameters = new SearchParameter();
+
+            if (!username.IsNullOrEmpty())
+            {
+                var s = _unitOfWork.SearchParameter.Find(x => x.Username == username).ToList<SearchParameter>();
+                if (s.Count > 0) { searchParameters = s[0]; }
+            }
+            else
+            {
+                string customErrorMessage = @$"<h1>The string username is null or empty!</h1>";
+                return Content(customErrorMessage, "text/html");
+            }
+
+            return View(searchParameters);
         }
 
         [HttpGet]
@@ -73,12 +93,6 @@ namespace MvcCrudApp.Web.Controllers
             // Save changes to the database
             _unitOfWork.SaveChanges();
 
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult SearchPage()
-        {
             return View();
         }
     }
