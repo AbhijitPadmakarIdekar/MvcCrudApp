@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 using WebApp.DataAccess.Context;
@@ -22,15 +23,12 @@ namespace WebApp.DataAccess.Implementation
         protected readonly DbSet<SearchParameter> SearchParameter;
 
         // Method to convert the object to JSON
-        public string ToJson()
+        public string ToJson(SearchParameter searchParameter)
         {
-            // Exclude JsonData property from serialization
-            var options = new JsonSerializerOptions
-            {
-                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault
-            };
+            // Set the JsonData property
+            searchParameter.JsonData = JsonSerializer.Serialize(searchParameter);
 
-            return JsonSerializer.Serialize(this, options);
+            return searchParameter.JsonData;
         }
 
         // Method to deserialize JSON to object

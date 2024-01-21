@@ -9,7 +9,7 @@ namespace WebApp.Domain.Repository
 {
     public interface ISearchParameterRepository : IGenericRepository<SearchParameter>
     {
-        string ToJson();
+        string ToJson(SearchParameter searchParameter);
         SearchParameter FromJson(string jsonString);
     }
 }

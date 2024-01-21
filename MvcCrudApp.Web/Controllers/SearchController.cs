@@ -28,9 +28,19 @@ namespace MvcCrudApp.Web.Controllers
         {
             // Your logic to retrieve or generate data
             bool dataToPass = false;
+            List<SearchParameter> existingSearchParameter;
 
-            // Get or create the entity
-            var existingSearchParameter = _unitOfWork.SearchParameter.Find(x => x.Username == searchParameter.Username).ToList<SearchParameter>();
+            if (searchParameter != null)
+            {
+                // Get or create the entity
+                searchParameter.JsonData = _unitOfWork.SearchParameter.ToJson(searchParameter);
+                existingSearchParameter = _unitOfWork.SearchParameter.Find(x => x.Username == searchParameter.Username).ToList<SearchParameter>();
+            }
+            else
+            {
+                string customErrorMessage = @$"<h1>The Object searchParameter is null or empty!</h1>";
+                return Content(customErrorMessage, "text/html");
+            }
 
             if (existingSearchParameter == null || existingSearchParameter.Count() == 0)
             {
