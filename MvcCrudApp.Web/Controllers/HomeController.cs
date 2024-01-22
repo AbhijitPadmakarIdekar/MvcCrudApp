@@ -30,11 +30,11 @@ namespace MvcCrudApp.Web.Controllers
             {
                 var s = _unitOfWork.User.Find(x => x.UserName == user.UserName).ToList<User>();
 
-                if (s.Count > 0 || s != null)
+                if (s.Count > 0)
                 {
                     if (user.UserName == s[0].UserName && user.Password == s[0].Password)
                     {
-                        return RedirectToAction("SearchPage", "Search", new { user.UserName });
+                        return RedirectToAction("SearchEntry", "Search", new { user.UserName });
                     }
                     else
                     {
