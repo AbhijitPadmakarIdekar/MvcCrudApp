@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MvcCrudApp.Web.Models;
 using System.Diagnostics;
 using WebApp.Domain.Entities;
@@ -11,7 +12,7 @@ namespace MvcCrudApp.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger , IUnitOfWork unitOfWork)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
@@ -20,6 +21,35 @@ namespace MvcCrudApp.Web.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult LoginUser(User user)
+        {
+            if (user != null && !user.UserName.IsNullOrEmpty())
+            {
+                var s = _unitOfWork.User.Find(x => x.UserName == user.UserName).ToList<User>();
+
+                if (s.Count > 0 || s != null)
+                {
+                    if (user.UserName == s[0].UserName && user.Password == s[0].Password)
+                    {
+                        return RedirectToAction("SearchPage", "Search", new { user.UserName });
+                    }
+                    else
+                    {
+                        string customErrorMessage = @$"<h1>Login Failed! Username or Password is wrong!</h1>";
+                        return Content(customErrorMessage, "text/html");
+                    }
+                }
+                else
+                {
+                    string customErrorMessage = @$"<h1>Login Failed! User does not exist!</h1>";
+                    return Content(customErrorMessage, "text/html");
+                }
+            }
+
+            return View(user);
         }
 
         [HttpGet]
@@ -35,8 +65,8 @@ namespace MvcCrudApp.Web.Controllers
             {
                 _unitOfWork.User.Add(user);
                 _unitOfWork.SaveChanges();
-                
-                return RedirectToAction("Success", "Home"); 
+
+                return RedirectToAction("Success", "Home");
             }
 
             return View(user);

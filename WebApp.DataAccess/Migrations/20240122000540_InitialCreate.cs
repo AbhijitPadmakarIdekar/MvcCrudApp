@@ -12,12 +12,35 @@ namespace WebApp.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "SearchParameters",
+                columns: table => new
+                {
+                    SearchParameterId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fieldname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Datatype = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ControlType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Constraint = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaxLength = table.Column<int>(type: "int", nullable: true),
+                    MinLimit = table.Column<int>(type: "int", nullable: true),
+                    MaxLimit = table.Column<int>(type: "int", nullable: true),
+                    MaskPattern = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    JsonData = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SearchParameters", x => x.SearchParameterId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<string>(type: "VARCHAR(20)", maxLength: 20, nullable: false),
                     Role = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastLogin = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -49,6 +72,9 @@ namespace WebApp.DataAccess.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "SearchParameters");
+
             migrationBuilder.DropTable(
                 name: "Users");
         }

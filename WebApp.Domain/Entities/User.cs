@@ -13,9 +13,19 @@ namespace WebApp.Domain.Entities
         [Key]
         public int UserId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "UserName is required")]
+        [RegularExpression("^[a-zA-Z0-9]+$", ErrorMessage = "UserName must contain only digits & letters.")]
         [MaxLength(50)]
         public string? UserName { get; set; } = string.Empty;
+
+        [RegularExpression("^[a-zA-Z0-9]+$",
+            ErrorMessage = "UserName must contain only digits & letters.")]
+        [Required(ErrorMessage = "Password is required!")]
+        [Column(TypeName = "VARCHAR(20)")]
+        [StringLength(20, MinimumLength = 10,
+            ErrorMessage = "Password must be in range 10 to 20 letters.")]
+        [DataType(DataType.Password)]
+        public string? Password { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(50)]
@@ -46,7 +56,7 @@ namespace WebApp.Domain.Entities
         [Range(0, 9.99, ErrorMessage = "Seniority must be between 0 and 9.99")]
         public decimal? Seniority { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "EmpCode is required")]
         [MaxLength(10)]
         [RegularExpression(@"^[A-Z]{3}\d{4}$", ErrorMessage = "EmpCode must be in the format XXX9999")]
         public string? EmpCode { get; set; } = string.Empty;

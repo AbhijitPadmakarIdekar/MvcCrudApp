@@ -106,6 +106,11 @@ namespace WebApp.DataAccess.Migrations
                     b.Property<int?>("MgrId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("VARCHAR(20)");
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(50)
