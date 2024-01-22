@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Search Parameters Entry";
+    string? username = ViewBag.Username as string;
+
 }
 
 <div class="container mt-5">
@@ -13,9 +15,18 @@
         <div class="row">
             <!-- Username -->
             <div class="col-md-6 mb-3">
-                <label asp-for="Username" class="form-label">Username (Mandatory): </label>
-                <input asp-for="Username" class="form-control" required />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                @if (username != string.Empty)
+                {
+                    <label asp-for="Username" class="form-label">Username (Mandatory): </label>
+                    <input asp-for="Username" class="form-control" required value="@username" readonly />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                }
+                else
+                {
+                    <label asp-for="Username" class="form-label">Username (Mandatory): </label>
+                    <input asp-for="Username" class="form-control" required />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                }
             </div>
 
             <!-- Fieldname -->

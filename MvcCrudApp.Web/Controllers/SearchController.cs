@@ -38,8 +38,10 @@ namespace MvcCrudApp.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchEntry()
+        public IActionResult SearchEntry(string? username)
         {
+            ViewBag.Username = username ?? string.Empty;
+
             return View();
         }
 
